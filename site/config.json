@@ -1,31 +1,11 @@
 {
   "site_url": "https://lewiskim7.github.io",
-  "site_title": "Lewis Kim (김유찬) — 포트폴리오·블로그",
-  "site_description": "금융·딥테크 투자 실무자 Lewis Kim(김유찬)의 프로젝트와 루이스킴 블로그 글 모음.",
-  "name": "Lewis Kim · 김유찬",
-  "tagline": "Finance and deep-tech investment professional",
-  "intro": "한국 IPO·전환사채·공시와 자본시장 업무를 AI로 다루는 프로젝트를 만들고, 투자와 생활을 숫자로 정리한 글을 네이버 블로그에 씁니다.",
-  "projects": [
-    {
-      "name": "Korea IPO & CB Risk Screener",
-      "url": "https://lewis-kim-applicant.vercel.app/",
-      "code": "https://github.com/LewisKim7/LewisKim7.github.io",
-      "desc": "한국어 IPO·전환사채 공시를 선별하고 근거 문단을 찾아 보여주는 투명한 NLP 프로토타입."
-    },
-    {
-      "name": "Investment AI Portfolio",
-      "url": "https://investment-ai-portfolio.vercel.app/",
-      "desc": "투자·업무 자동화 프로젝트 전체 모음."
-    },
-    {
-      "name": "루이스킴 블로그 (네이버)",
-      "url": "https://m.blog.naver.com/lewis_note",
-      "desc": "투자와 생활을 숫자로 정리하는 개인 리서치 노트."
-    }
-  ],
+  "site_title": "루이스킴 블로그 — 투자와 생활을 숫자로 정리하는 리서치 노트",
+  "site_description": "네이버 '루이스킴 블로그' 전체 글 모음. 매크로·시장, 기업·IPO 분석부터 전자제품·생활 정보까지 투자와 생활을 숫자로 정리한 개인 리서치 노트입니다.",
+  "blog_name": "루이스킴 블로그",
+  "blog_tagline": "투자와 생활을 숫자로 정리하는 개인 리서치 노트",
+  "author": "Lewis Kim",
   "blog_id": "lewis_note",
-  "blog_title": "루이스킴 블로그 글 모음",
-  "blog_description": "네이버 블로그 '루이스킴 블로그'(투자와 생활을 숫자로 정리하는 개인 리서치 노트)의 전체 글 목록입니다.",
   "google_site_verification": "bwwvTzsYHeCahsWk6fU2_XDHukun44t9Gsoy8sQ8y8k",
   "naver_site_verification": "",
   "bing_site_verification": "",
