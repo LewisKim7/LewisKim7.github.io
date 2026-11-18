@@ -164,6 +164,8 @@ def build(posts: dict[str, dict]) -> None:
         encoding="utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    if CFG.get("indexnow_key"):  # IndexNow(Bing·네이버 등) 소유 확인용 공개 키 파일
+        (OUT / f'{CFG["indexnow_key"]}.txt').write_text(CFG["indexnow_key"], encoding="utf-8")
 
 
 def main() -> int:
@@ -173,6 +175,12 @@ def main() -> int:
     merged = {**old, **new}  # RSS는 최근 50개만 주므로 예전 글은 누적 보존
     data.write_text(json.dumps(merged, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     build(merged)
+    # IndexNow로 알릴 주소: 새 글만(전체 재알림은 INDEXNOW_ALL=1)
+    import os
+    ids = merged if os.environ.get("INDEXNOW_ALL") == "1" else {k: v for k, v in new.items() if k not in old}
+    urls = ([f"{SITE}/", f"{SITE}/blog/"] if ids else []) + [f"{SITE}/blog/posts/{k}.html" for k in ids]
+    (HERE.parent / "indexnow_urls.json").write_text(json.dumps(urls), encoding="utf-8")
+    print(f"indexnow urls={len(urls)}")
     print(f"posts total={len(merged)} from_rss={len(new)}")
     return 0
 

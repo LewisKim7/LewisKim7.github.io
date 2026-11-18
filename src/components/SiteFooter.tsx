@@ -1,6 +1,6 @@
 import { APPLICATION_CONTEXT } from '../config/application-profile'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/Lewis-Kim-Applicant'
+const SOURCE_URL = 'https://github.com/LewisKim7/LewisKim7.github.io'
 
 export function SiteFooter() {
   return (

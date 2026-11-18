@@ -1,4 +1,4 @@
-const SOURCE_URL = 'https://github.com/LewisKim7/Lewis-Kim-Applicant'
+const SOURCE_URL = 'https://github.com/LewisKim7/LewisKim7.github.io'
 
 export function SiteHeader() {
   return (
