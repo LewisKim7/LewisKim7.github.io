@@ -3,7 +3,8 @@
 A transparent Korean-language NLP portfolio project for screening IPO and convertible-bond disclosures, retrieving passage-level evidence, and making model behavior inspectable.
 
 **Live demo:** https://lewis-kim-applicant.vercel.app/  
-**Canonical repository:** https://github.com/LewisKim7/Lewis-Kim-Applicant
+**Canonical repository:** https://github.com/LewisKim7/LewisKim7.github.io  
+**Personal site (portfolio & blog):** https://lewiskim7.github.io/
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
@@ -317,3 +318,6 @@ AI-assisted coding tools were used for portions of synthetic-data drafting, impl
 ## Disclaimer
 
 This is an independent educational and portfolio project. It is not investment advice, legal advice, regulatory advice, or an official publication of any employer, university, exchange, or regulator.
+## Personal site
+
+The `site/` folder and `.github/workflows/site.yml` build https://lewiskim7.github.io/ (portfolio home and a search-friendly index of the author's Naver blog). They are separate from the screener app: Vercel ignores changes there, and blog data is kept on the `blog-data` branch.

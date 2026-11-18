@@ -1,0 +1,57 @@
+name: Site (portfolio + blog)
+
+# lewiskim7.github.io 빌드·배포. 블로그 누적 데이터는 blog-data 브랜치에만 커밋한다
+# (main 이력과 지원 앱 Vercel 배포를 건드리지 않기 위함).
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/site.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Load blog data
+        run: |
+          git fetch --depth=1 origin blog-data && git show origin/blog-data:posts.json > posts.json || echo '{}' > posts.json
+      - name: Build
+        run: python3 site/build.py posts.json
+      - name: Save blog data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir /tmp/bd && cp posts.json /tmp/bd/
+          cd /tmp/bd && git init -q -b blog-data && git add posts.json
+          if git -C "$GITHUB_WORKSPACE" show origin/blog-data:posts.json 2>/dev/null | cmp -s - posts.json; then
+            echo "no new posts"; exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "blog data $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" blog-data
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
