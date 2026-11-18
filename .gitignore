@@ -28,3 +28,4 @@ dist-ssr
 # GitHub Pages build (site/build.py)
 /_site
 /posts.json
+/indexnow_urls.json

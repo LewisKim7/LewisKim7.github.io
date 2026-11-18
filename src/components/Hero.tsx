@@ -9,7 +9,7 @@ import { ProfileSection } from './ProfileSection'
 import { RiskOverview } from './RiskOverview'
 import { WorkflowPrimer } from './WorkflowPrimer'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/Lewis-Kim-Applicant'
+const SOURCE_URL = 'https://github.com/LewisKim7/LewisKim7.github.io'
 const TRACE_PASSAGE = (() => {
   const passage = ALL_PASSAGES.find(
     (item) => item.passageId === 'DOC-KR-CB-RESET-001-P01',

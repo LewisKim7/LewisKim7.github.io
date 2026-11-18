@@ -23,13 +23,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      urls: ${{ steps.idx.outputs.urls }}
+      key: ${{ steps.idx.outputs.key }}
     steps:
       - uses: actions/checkout@v7
       - name: Load blog data
         run: |
           git fetch --depth=1 origin blog-data && git show origin/blog-data:posts.json > posts.json || echo '{}' > posts.json
       - name: Build
+        env:
+          INDEXNOW_ALL: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python3 site/build.py posts.json
+      - id: idx
+        run: |
+          echo "urls=$(cat indexnow_urls.json)" >> "$GITHUB_OUTPUT"
+          echo "key=$(python3 -c "import json;print(json.load(open('site/config.json'))['indexnow_key'])")" >> "$GITHUB_OUTPUT"
       - name: Save blog data
         run: |
           git config user.name "github-actions[bot]"
@@ -55,3 +64,16 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+      - name: Notify search engines (IndexNow → Bing, Naver 등)
+        if: needs.build.outputs.urls != '[]'
+        env:
+          URLS: ${{ needs.build.outputs.urls }}
+          KEY: ${{ needs.build.outputs.key }}
+        run: |
+          python3 - "$KEY" <<'PY' > body.json
+          import json, os, sys
+          print(json.dumps({"host": "lewiskim7.github.io", "key": sys.argv[1],
+                            "keyLocation": f"https://lewiskim7.github.io/{sys.argv[1]}.txt",
+                            "urlList": json.loads(os.environ["URLS"])}))
+          PY
+          curl -sS -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" --data @body.json
