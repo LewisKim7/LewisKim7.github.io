@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# GitHub Pages build (site/build.py)
+/_site
+/posts.json
