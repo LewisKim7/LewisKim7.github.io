@@ -4,7 +4,6 @@ A transparent Korean-language NLP portfolio project for screening IPO and conver
 
 **Live demo:** https://lewis-kim-applicant.vercel.app/  
 **Canonical repository:** https://github.com/LewisKim7/LewisKim7.github.io  
-**Author's blog index:** https://lewiskim7.github.io/
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
@@ -318,11 +317,7 @@ AI-assisted coding tools were used for portions of synthetic-data drafting, impl
 ## Disclaimer
 
 This is an independent educational and portfolio project. It is not investment advice, legal advice, regulatory advice, or an official publication of any employer, university, exchange, or regulator.
-## Blog index site (`site/`)
 
-The `site/` folder and `.github/workflows/site.yml` build https://lewiskim7.github.io/, a search-friendly index of the author's Naver blog (루이스킴 블로그). It is independent of the screener app:
+## Repository housekeeping
 
-- **Content:** every post's title, date, category, and excerpt, each linking to the indexable original on `m.blog.naver.com`.
-- **Updates:** GitHub Actions rebuilds every 6 hours from the blog RSS; accumulated post data lives on the `blog-data` branch.
-- **Discovery:** `sitemap.xml`, `robots.txt`, schema.org metadata, Google Search Console, and IndexNow (Bing, Naver) notifications for new posts.
-- **Isolation:** Vercel ignores changes under `site/` and `.github/`, so blog updates never redeploy the screener.
+The `site/` folder and `.github/workflows/site.yml` build a separate static page published at the account's GitHub Pages address. They are unrelated to the screener: Vercel ignores changes there, so they never affect the live demo or its evaluation results.
